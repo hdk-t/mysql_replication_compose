@@ -1,0 +1,36 @@
+version: "3"
+networks:
+  mysql_repl_network:
+    name: mysql_repl_network
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.0.0/16
+services:
+  db_master:
+    build: ./
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass
+    tty: true
+    volumes:
+      - ./mysql_master/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+      - ./mysql_master/data:/var/lib/mysql
+      - ./mysql_master/logs/mysql:/var/log/mysql
+    restart: always
+    networks:
+      mysql_repl_network:
+        ipv4_address: 172.16.0.2
+  db_slave:
+    build: ./
+    environment:
+      - MYSQL_ROOT_PASSWORD=pass
+    tty: true
+    volumes:
+      - ./mysql_slave/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+      - ./mysql_slave/data:/var/lib/mysql
+      - ./mysql_slave/logs/mysql:/var/log/mysql
+    restart: always
+    networks:
+      mysql_repl_network:
+        ipv4_address: 172.16.0.3
