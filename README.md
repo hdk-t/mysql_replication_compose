@@ -1,0 +1,2 @@
+# mysql_replication_compose
+Dockerコンテナ間でMySQLのレプリケーションを貼ります。
