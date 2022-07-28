@@ -22,7 +22,7 @@ Master mysql
 ### マスターステータスを確認
 Master mysql  
 
-    show master status;  
+    SHOW MASTER STATUS;  
 
 結果をコピーしておく  
 
@@ -39,12 +39,12 @@ Slave mysql
 ### スタートスレーブ
 Slave mysql  
 
-    start slave;  
+    START SLAVE;  
 
 ### スレーブステータスを確認して 「Waiting for source to send event」 だったらOK
 Slave mysql  
 
-    show slave status;  
+    SHOW SLAVE STATUS;  
 
 ### レプリケーションされてるか確認
 Master mysql  
